@@ -17072,7 +17072,7 @@ class mPDF
 
 			//================================================================
             $y = $cont_y + ((is_int($bbox_top)) ? $bbox_top : 0) + $bbox_mt + $bbox_bt + $bbox_pt;
-            $h = $cont_h - ((is_int($bbox_top)) ? $bbox_top : 0) - $bbox_mt - $bbox_bt - $bbox_pt - $bbox_pb - $bbox_bb - $bbox_mb - $bbox_bottom;
+            $h = $cont_h - ((is_int($bbox_top)) ? $bbox_top : 0) - $bbox_mt - $bbox_bt - $bbox_pt - $bbox_pb - $bbox_bb - $bbox_mb - ((is_int($bbox_bottom)? $bbox_bottom : 0));
             $x = $cont_x + ((is_int($bbox_left)) ? $bbox_left : 0) + $bbox_ml + $bbox_bl + $bbox_pl;
             $w = $cont_w - ((is_int($bbox_left)) ? $bbox_left : 0) - $bbox_ml - $bbox_bl - $bbox_pl - $bbox_pr - $bbox_br - $bbox_mr - $bbox_right;
 			// Set (temporary) values for x y w h to do first paint, if values are auto
@@ -30559,6 +30559,7 @@ class mPDF
 		// Setting e.g. margin % will use maxsize (pagewidth) and em will use fontsize
 		// Returns values using 'mm' units
 		$size = trim(strtolower($size));
+		$size = ($size === "")? 0 : $size;
 
 		if ($size == 'thin')
 			$size = 1 * (25.4 / $this->dpi); //1 pixel width for table borders
